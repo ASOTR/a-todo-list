@@ -36,7 +36,7 @@ const webpackConfig = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                options: {
+                /*options: {
                     transformAssetUrls: {
                         //自动require html中的静态资源文件，打包
                         video: ['src', 'poster'],
@@ -45,8 +45,14 @@ const webpackConfig = {
                         image: ['xlink:href', 'href'],
                         use: ['xlink:href', 'href']
                     }
-                }
+                }*/
             },
+            // {
+            //     enforce: 'pre',
+            //     test: /\.(js|vue)$/,
+            //     loader: 'eslint-loader',
+            //     exclude: /node_modules/
+            // },
             {
                 test:/(\.jsx|\.js)$/,
                 exclude: /(node_modules|bower_components)/,
@@ -76,7 +82,7 @@ const webpackConfig = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: '[name].[ext]',
+                    name: '[name]-[hash:7].[ext]',
                     esModule:false,
                     outputPath: 'movies/',
                 }
