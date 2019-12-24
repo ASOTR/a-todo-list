@@ -1,6 +1,6 @@
 <template>
   <div class="row item-container">
-    <ul class="col-md-8 col-md-offset-2">
+    <transition-group name="list" tag="ul" class="col-md-8 col-md-offset-2">
       <li
         class="row container-fluid form-inline shadow-sm p-3 mb-1 rounded"
         v-for="(item) in items"
@@ -26,7 +26,8 @@
           @click="$emit('del',item.id)"
         >
       </li>
-    </ul>
+      <p v-if="!items.length>0">nothing todo</p>
+    </transition-group>
   </div>
 </template>
 
@@ -65,8 +66,8 @@ export default {
   }
   .item-container ul > li label {
     display: inline-block;
-    line-height: 50px;
     padding: 0;
+    line-height: 50px;
   }
   .item-container ul > li input {
     display: inline-block;
@@ -77,5 +78,16 @@ export default {
   input[type=checkbox]:checked + label {
     color: red;
     text-decoration: line-through;
+  }
+
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 0.5s;
+  }
+  .list-enter,
+  .list-leave-to
+    /* .list-leave-active for below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateX(-300px);
   }
 </style>
