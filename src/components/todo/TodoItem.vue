@@ -26,7 +26,7 @@
           @click="$emit('del',item.id)"
         >
       </li>
-      <p v-if="!items.length>0">nothing todo</p>
+      <p name="todo" :key="-1"  v-if="!items.length>0">nothing todo</p>
     </transition-group>
   </div>
 </template>

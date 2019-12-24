@@ -1,26 +1,21 @@
 'use strict'
 const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
-const webpackConfig = {
-    mode: 'development',
+const baseWebpackConfig = {
     context: path.resolve(__dirname, '../'),
     entry: path.resolve(__dirname, "../src/index.js"),
-    output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: "bundle.js",
-        // 影响打包后的页面引用bundle.js带有前缀或公共路径
-        publicPath: "/",
-        //publicPath: "localhost:8080//assets/"
-    },
+    // output: {
+    //     path: path.resolve(__dirname, '../dist'),
+    //     filename: "js/bundle-[chunkhash].js",
+    //     chunkFilename: 'js/[id].[chunkhash].js',
+    //     // 影响打包后的页面引用bundle.js带有前缀或公共路径
+    //     publicPath: "/",
+    //     //publicPath: "localhost:8080//assets/"
+    // },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
@@ -61,17 +56,10 @@ const webpackConfig = {
                 }
             },
             {
-                test:/\.css$/,
-                use:[
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 100,
+                    limit: 1000,
                     name: '[name].[ext]',
                     esModule:false,
                     outputPath: 'images/',
@@ -98,44 +86,7 @@ const webpackConfig = {
                 }
             }
         ]
-    },
-    devtool: "eval-source-map",
-    devServer: {
-        publicPath: "/",
-        //contentBase:path.join(__dirname,'../'),
-        //contentBase: false,
-        historyApiFallback: true,
-        port: 8080,
-        hot: true,
-        inline: true,
-        open:false,
-        overlay: {
-            errors:true,
-        }
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV':  '"development"'
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'index.html',
-            inject: true
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-        new webpack.NoEmitOnErrorsPlugin(),
-        // copy custom static assets
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, '../static'),
-                to: "static",
-                ignore: ['.*']
-            }
-        ]),
-        //new CleanWebpackPlugin()
-        new VueLoaderPlugin()
-    ]
+    }
 }
 
-module.exports = webpackConfig
+module.exports = baseWebpackConfig
