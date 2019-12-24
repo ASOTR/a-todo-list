@@ -34,6 +34,8 @@ module.exports = {
     'generator-star-spacing': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
+    'linebreak-style': 'off',
+    //'linebreak-style': ["error", "windows"],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

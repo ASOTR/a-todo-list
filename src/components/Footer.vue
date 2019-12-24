@@ -16,6 +16,7 @@ export default {
 
 <style scoped>
   .v-footer {
+    margin-top: 50px;
     color: aquamarine;
     text-align: center;
   }

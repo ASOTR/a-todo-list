@@ -1,9 +1,12 @@
 <template>
   <div class="container">
-    <input
-      class="addTodo"
-      @keydown.enter="addItem"
-    >
+    <div class="row">
+      <input
+        class="form-control col-md-8 col-md-offset-2 addTodo"
+        placeholder="add something todo"
+        @keydown.enter="addItem"
+      >
+    </div>
     <TodoItems
       :items="filterItemList"
       @del="del"
@@ -36,7 +39,7 @@ export default {
   },
   computed: {
     itemsLeft() {
-      return this.itemList.filter((item) => item.completed === false).length;
+      return this.filterItemList.filter((item) => item.completed === false).length;
     },
     filterItemList() {
       if (this.filter === 'ALL') {
@@ -63,7 +66,7 @@ export default {
       e.target.value = '';
     },
     changeFilter(e) {
-      this.filter = e;
+      this.filter = e.trim();
     },
     clearCompleted() {
       this.itemList = this.itemList.filter((item) => item.completed === false);

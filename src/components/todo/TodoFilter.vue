@@ -1,26 +1,28 @@
 <template>
-  <div class="filter-container">
-    <span>{{ listLength }} item left</span>
-    <ul
-      class="btn-container"
-      @click="doFilter"
-    >
-      <li :class="filter=='ALL'?'active':''">
-        ALL
-      </li>
-      <li :class="filter=='TODO'?'active':''">
-        TODO
-      </li>
-      <li :class="filter=='Completed'?'active':''">
-        Completed
-      </li>
-    </ul>
-    <input
-      type="button"
-      class="btn-clear"
-      value="Clear Complete"
-      @click="$emit('clearCompleted')"
-    >
+  <div class="row">
+    <div class="row col-md-9 col-md-offset-1 form-inline">
+      <div class="col-md-3"><span class="badge">{{ listLength }}</span> items</div>
+      <ul
+        class="col-md-6  btn-container"
+        @click="doFilter"
+      >
+        <li :class="filter=='ALL'?'active':''">
+          ALL
+        </li>
+        <li :class="filter=='TODO'?'active':''">
+          TODO
+        </li>
+        <li :class="filter=='Completed'?'active':''">
+          Completed
+        </li>
+      </ul>
+      <input
+        type="button"
+        class="col-md-3 btn-clear  btn btn-info"
+        value="Clear Complete"
+        @click="$emit('clearCompleted')"
+      >
+    </div>
   </div>
 </template>
 
@@ -53,6 +55,10 @@ export default {
 </script>
 
 <style scoped>
+  .row {
+    padding: 5px 10px 0 0;
+    margin: 0 auto;
+  }
   .filter-container {
     display: flex;
     align-items: center;
@@ -60,16 +66,24 @@ export default {
     padding: 0 100px 0 100px;
   }
   .filter-container > span {
-    display: block;
-    text-align: center;
+    /*display: block;*/
+    /*text-align: center;*/
+  }
+  .badge {
+    background-color: rgba(180, 200, 180, 0.4);
+  }
+  .btn-container {
+    margin: 0 auto;
   }
   .btn-container li {
     display: inline-block;
-    padding: 8px;
+    padding: 5px;
+    text-align: center;
     border: 1px solid #666;
+    border-radius: 10%;
   }
   .btn-container li.active {
-    background-color: #ff8c99;
+    background-color: rgba(180, 200, 180, 0.4);
   }
   /*.btn-clear {}*/
 </style>
