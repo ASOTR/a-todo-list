@@ -28,12 +28,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           'style-loader',
           {
             loader: "css-loader",
-            options: {
+            /*options: {//CSS Modules
               sourceMap: true,
               modules: {
                 mode:'local',
                 localIdentName: '[path][name]__[local]--[hash:base64:5]'
               }
+            }*/
+            options: {
+              sourceMap: true,
             }
           },
           'postcss-loader',

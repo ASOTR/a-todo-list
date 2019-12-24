@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 const WebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -69,11 +70,18 @@ const WebpackConfig = merge(baseWebpackConfig, {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: './css/[name]--[contenthash].css',
-      chunkFilename: './css/[id]--[contenthash].css',
+      filename: 'css/[name]--[contenthash].css',
+      chunkFilename: 'css/[id]--[contenthash].css',
     }),
     new OptimizeCSSPlugin(),
     new UglifyJsPlugin(),
+   /* new CompressionWebpackPlugin({ //js、css压缩
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js(\?.*)?$/i,
+      threshold: 10240,
+      minRatio: 0.8
+    }),*/
     new VueLoaderPlugin(),
   ],
   // 公共模块依赖独立打包：例如vue.js
